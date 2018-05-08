@@ -53,10 +53,9 @@ public class SendExampleActivity extends AppCompatActivity {
             Intent launchIntent = getPackageManager().getLaunchIntentForPackage(
                     getString(R.string.connect_package));
             if (launchIntent != null) {
-                Bundle mBundle = new Bundle();
                 Bundle mCredentialsBundle = new Bundle();
                 mCredentialsBundle.putString(CONNECT_VOUCHER, jsonToSend);
-                launchIntent.putExtras(mBundle);
+                launchIntent.putExtras(mCredentialsBundle);
                 startActivity(launchIntent);
             }
         }
