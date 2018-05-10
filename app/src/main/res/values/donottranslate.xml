@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="connect_package" translatable="false">org.eyeseetea.surveillance_ref_dev</string>
+    <string name="json_file_name" translatable="false">connect_voucher.json</string>
+</resources>
