@@ -1,5 +1,6 @@
 package org.eyeseetea.connect2connectexampleapp;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -50,14 +51,18 @@ public class SendExampleActivity extends AppCompatActivity {
 
     private void sendJsonText(String jsonToSend) {
         if (validateJson(jsonToSend)) {
-            Intent launchIntent = getPackageManager().getLaunchIntentForPackage(
-                    getString(R.string.connect_package));
-            if (launchIntent != null) {
-                Bundle mCredentialsBundle = new Bundle();
-                mCredentialsBundle.putString(CONNECT_VOUCHER, jsonToSend);
-                launchIntent.putExtras(mCredentialsBundle);
-                startActivity(launchIntent);
-            }
+            Intent launchIntent = new Intent();
+            Bundle mCredentialsBundle = new Bundle();
+            mCredentialsBundle.putString(CONNECT_VOUCHER, jsonToSend);
+            launchIntent.putExtras(mCredentialsBundle);
+            ComponentName componentName = new ComponentName(getString(R.string.connect_package), "org.eyeseetea.malariacare.SplashScreenActivity");
+            launchIntent.setComponent(componentName);
+            launchIntent.addCategory(Intent.ACTION_DEFAULT);
+            launchIntent.setAction(Intent.ACTION_SEND);
+            launchIntent.setType("text/plain");
+            launchIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                    Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+            startActivity(launchIntent);
         }
     }
 
